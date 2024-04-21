@@ -1,19 +1,12 @@
-"use client";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { sidebarLinks } from "@/constants";
-import { cn } from "@/lib/utils";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { sidebarLinks } from '@/constants';
+import { cn } from '@/lib/utils';
 
 const MobileNav = () => {
   const pathname = usePathname();
@@ -21,36 +14,30 @@ const MobileNav = () => {
   return (
     <section className="w-full max-w-[264px]">
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger asChild>
           <Image
             src="/icons/hamburger.svg"
             width={36}
             height={36}
-            alt="hamburger"
+            alt="hamburger icon"
             className="cursor-pointer sm:hidden"
           />
         </SheetTrigger>
-        <SheetContent side="left" className="border-none bg-dark-1 ">
-          <Link className="flex items-center gap-3" href="/">
+        <SheetContent side="left" className="border-none bg-dark-1">
+          <Link href="/" className="flex items-center gap-1">
             <Image
               src="/icons/main_logo.png"
-              width={42}
-              height={42}
-              alt="Sign-Bridge Logo"
-              className="max-sm:size-10"
+              width={32}
+              height={32}
+              alt="yoom logo"
             />
-
-            <p className="text-[26px] font-extrabold text-white ">
-              Sign-Bridge
-            </p>
+            <p className="text-[26px] font-extrabold text-white">Sign-Bridge</p>
           </Link>
           <div className="flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto">
-            <SheetClose asChild >
-              <section className="flex h-full flex-col gap-6 pt-16 text-white">
+            <SheetClose asChild>
+              <section className=" flex h-full flex-col gap-6 pt-16 text-white">
                 {sidebarLinks.map((item) => {
-                  const isActive =
-                    pathname === item.route ||
-                    pathname.startsWith(`${item.route}/`);
+                  const isActive = pathname === item.route;
 
                   return (
                     <SheetClose asChild key={item.route}>
@@ -58,9 +45,9 @@ const MobileNav = () => {
                         href={item.route}
                         key={item.label}
                         className={cn(
-                          "flex gap-4 items-center p-4 rounded-lg w-full max-w-60",
+                          'flex gap-4 items-center p-4 rounded-lg w-full max-w-60',
                           {
-                            "bg-blue-1": isActive,
+                            'bg-blue-1': isActive,
                           }
                         )}
                       >
@@ -70,7 +57,6 @@ const MobileNav = () => {
                           width={20}
                           height={20}
                         />
-
                         <p className="font-semibold">{item.label}</p>
                       </Link>
                     </SheetClose>
